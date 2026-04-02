@@ -1,6 +1,6 @@
 package main
 import ("fmt";"log";"net/http";"os";"github.com/stockyard-dev/stockyard-pathfinder/internal/server";"github.com/stockyard-dev/stockyard-pathfinder/internal/store")
-func main(){port:=os.Getenv("PORT");if port==""{port="9740"};dataDir:=os.Getenv("DATA_DIR");if dataDir==""{dataDir="./pathfinder-data"}
+func main(){port:=os.Getenv("PORT");if port==""{port="9700"};dataDir:=os.Getenv("DATA_DIR");if dataDir==""{dataDir="./pathfinder-data"}
 db,err:=store.Open(dataDir);if err!=nil{log.Fatalf("pathfinder: %v",err)};defer db.Close();srv:=server.New(db)
-fmt.Printf("\n  Pathfinder — URL routing and proxy rules manager\n  Dashboard:  http://localhost:%s/ui\n  API:        http://localhost:%s/api\n\n",port,port)
+fmt.Printf("\n  Pathfinder\n  Dashboard:  http://localhost:%s/ui\n  API:        http://localhost:%s/api\n\n",port,port)
 log.Printf("pathfinder: listening on :%s",port);log.Fatal(http.ListenAndServe(":"+port,srv))}
